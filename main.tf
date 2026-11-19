@@ -66,7 +66,7 @@ resource "aws_instance" "monitoring_server" {
 # CloudWatch CPU alarm
 resource "aws_cloudwatch_metric_alarm" "cpu_alarm" {
   alarm_name          = "EC2-High-CPU-Alarm"
-  alarm_description   = "Alarm when EC2 CPU utilization exceeds 70%"
+  alarm_description   = "Alarm when EC2 CPU utilization exceeds ${var.alarm_threshold}%"
   comparison_operator = "GreaterThanThreshold"
 
   evaluation_periods  = 2
