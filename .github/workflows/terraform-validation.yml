@@ -14,6 +14,10 @@ jobs:
     name: Terraform Format, Validate and Plan
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: ci-terraform
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -22,10 +26,10 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
-        run: terraform init -backend=false
+        run: terraform init
 
       - name: Terraform Format Check
-        run: terraform fmt -check -recursive
+        run: terraform fmt -check
 
       - name: Terraform Validate
         run: terraform validate
@@ -41,6 +45,6 @@ jobs:
         with:
           name: terraform-plan
           path: |
-            tfplan
-            terraform-plan.txt
+            ci-terraform/tfplan
+            ci-terraform/terraform-plan.txt
           retention-days: 7
